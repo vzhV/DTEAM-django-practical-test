@@ -34,6 +34,20 @@ poetry run flake8
 python manage.py loaddata main/data/initial_cv.json
 ```
 
+## Running Tests
+
+To run the test suite:
+
+```sh
+python manage.py test
+```
+
+To run tests with verbose output:
+
+```sh
+python manage.py test -v 2
+```
+
 ## Task Requirements:
 
 Follow PEP 8 and other style guidelines, use clear and concise commit messages and docstrings where needed, structure your project for readability and maintainability, optimize database access using Django’s built-in methods, and provide enough details in your README.
