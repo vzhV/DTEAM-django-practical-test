@@ -98,6 +98,9 @@
             align-items: center;
             gap: 8px;
         }
+        .card-link:focus, .card-link:hover {
+            text-decoration: none;
+        }
     </style>
 </head>
 <body>
@@ -142,6 +145,7 @@
         <div class="row equal-height">
             {% for cv in cvs %}
             <div class="col s12 m6 l4">
+            <a href="{% url 'cv_detail' pk=cv.id %}" class="card-link">
                 <div class="card cv-card hoverable">
                     <div class="card-content">
                         <div class="card-title card-title-center">
@@ -188,6 +192,7 @@
                         </div>
                     </div>
                 </div>
+            </a>
             </div>
             {% empty %}
             <div class="col s12">
