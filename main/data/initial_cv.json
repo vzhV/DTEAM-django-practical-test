@@ -1,0 +1,152 @@
+[
+  {
+    "model": "main.cv",
+    "pk": 1,
+    "fields": {
+      "firstname": "Volodymyr",
+      "lastname": "Zherdetskyi",
+      "skills": "Python, Django, FastAPI, ...",
+      "projects": "DTEAM - Django Developer Practical Test",
+      "bio": "Passionate Fullstack developer.",
+      "contacts": {
+        "email": "vzhe@example.com",
+        "phone": "+1234567890"
+      }
+    }
+  },
+  {
+    "model": "main.cv",
+    "pk": 2,
+    "fields": {
+      "firstname": "Test",
+      "lastname": "User-2",
+      "skills": "JavaScript, React, Node.js",
+      "projects": "Frontend App, SPA",
+      "bio": "Sample bio for Test User-2.",
+      "contacts": {
+        "email": "testuser2@example.com",
+        "phone": "+1234567892"
+      }
+    }
+  },
+  {
+    "model": "main.cv",
+    "pk": 3,
+    "fields": {
+      "firstname": "Test",
+      "lastname": "User-3",
+      "skills": "Go, Kubernetes, Docker",
+      "projects": "Microservices, DevOps Tools",
+      "bio": "Sample bio for Test User-3.",
+      "contacts": {
+        "email": "testuser3@example.com",
+        "phone": "+1234567893"
+      }
+    }
+  },
+  {
+    "model": "main.cv",
+    "pk": 4,
+    "fields": {
+      "firstname": "Test",
+      "lastname": "User-4",
+      "skills": "Java, Spring Boot, SQL",
+      "projects": "Enterprise Backend, DB Migration",
+      "bio": "Sample bio for Test User-4.",
+      "contacts": {
+        "email": "testuser4@example.com",
+        "phone": "+1234567894"
+      }
+    }
+  },
+  {
+    "model": "main.cv",
+    "pk": 5,
+    "fields": {
+      "firstname": "Test",
+      "lastname": "User-5",
+      "skills": "C#, .NET, Azure",
+      "projects": "Cloud API, Internal Tools",
+      "bio": "Sample bio for Test User-5.",
+      "contacts": {
+        "email": "testuser5@example.com",
+        "phone": "+1234567895"
+      }
+    }
+  },
+  {
+    "model": "main.cv",
+    "pk": 6,
+    "fields": {
+      "firstname": "Test",
+      "lastname": "User-6",
+      "skills": "Ruby, Rails, Postgres",
+      "projects": "E-Commerce, Blog Engine",
+      "bio": "Sample bio for Test User-6.",
+      "contacts": {
+        "email": "testuser6@example.com",
+        "phone": "+1234567896"
+      }
+    }
+  },
+  {
+    "model": "main.cv",
+    "pk": 7,
+    "fields": {
+      "firstname": "Test",
+      "lastname": "User-7",
+      "skills": "PHP, Laravel, MySQL",
+      "projects": "CMS, Landing Pages",
+      "bio": "Sample bio for Test User-7.",
+      "contacts": {
+        "email": "testuser7@example.com",
+        "phone": "+1234567897"
+      }
+    }
+  },
+  {
+    "model": "main.cv",
+    "pk": 8,
+    "fields": {
+      "firstname": "Test",
+      "lastname": "User-8",
+      "skills": "Swift, iOS, UIKit",
+      "projects": "Mobile App, Widget",
+      "bio": "Sample bio for Test User-8.",
+      "contacts": {
+        "email": "testuser8@example.com",
+        "phone": "+1234567898"
+      }
+    }
+  },
+  {
+    "model": "main.cv",
+    "pk": 9,
+    "fields": {
+      "firstname": "Test",
+      "lastname": "User-9",
+      "skills": "C++, Qt, OpenGL",
+      "projects": "Desktop App, Game Engine",
+      "bio": "Sample bio for Test User-9.",
+      "contacts": {
+        "email": "testuser9@example.com",
+        "phone": "+1234567899"
+      }
+    }
+  },
+  {
+    "model": "main.cv",
+    "pk": 10,
+    "fields": {
+      "firstname": "Test",
+      "lastname": "User-10",
+      "skills": "Scala, Akka, Spark",
+      "projects": "Data Pipeline, Analytics",
+      "bio": "Sample bio for Test User-10.",
+      "contacts": {
+        "email": "testuser10@example.com",
+        "phone": "+1234567900"
+      }
+    }
+  }
+]
