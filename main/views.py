@@ -1,5 +1,9 @@
 from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
+from django.http import HttpResponse
 from django.shortcuts import render, get_object_or_404
+from django.template.loader import get_template
+from xhtml2pdf import pisa
+
 from .models import CV
 
 
@@ -33,3 +37,18 @@ def cv_list(request):
 def cv_detail(request, pk):
     cv = get_object_or_404(CV, pk=pk)
     return render(request, "main/cv_detail.html", {"cv": cv})
+
+
+def cv_pdf(request, pk):
+    cv = get_object_or_404(CV, pk=pk)
+    template = get_template("main/cv_pdf.html")
+    html = template.render({"cv": cv})
+
+    response = HttpResponse(content_type="application/pdf")
+    filename = f"{cv.firstname}-{cv.lastname}-cv.pdf".replace(" ", "_")
+    response["Content-Disposition"] = f'attachment; filename="{filename}"'
+
+    pisa_status = pisa.CreatePDF(html, dest=response)
+    if pisa_status.err:
+        return HttpResponse("We had some errors with PDF generation <br>" + html)
+    return response
