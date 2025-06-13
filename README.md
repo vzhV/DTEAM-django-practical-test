@@ -1,6 +1,26 @@
-## DTEAM - Django Developer Practical Test
+# DTEAM - Django Developer Practical Test
 
-Requirements:
+## Setup Instructions
+
+### 1. Install Python and pyenv
+
+- See [pyenv installation guide](https://github.com/pyenv/pyenv#installation).
+- Example: `pyenv install 3.11.9`
+- Set the local Python version: `pyenv local 3.11.9`
+
+### 2. Install Poetry
+
+- `pip install poetry`
+- Or see [Poetry documentation](https://python-poetry.org/docs/#installation).
+
+### 3. Install dependencies
+
+```sh
+poetry install
+```
+
+
+## Task Requirements:
 
 Follow PEP 8 and other style guidelines, use clear and concise commit messages and docstrings where needed, structure your project for readability and maintainability, optimize database access using Django’s built-in methods, and provide enough details in your README.
 

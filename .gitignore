@@ -1,0 +1,29 @@
+# Python bytecode and cache
+__pycache__/
+*.py[cod]
+
+# Django database
+db.sqlite3
+*.sqlite3
+
+# Virtual environments
+.env/
+.venv/
+env/
+venv/
+ENV/
+env.bak/
+venv.bak/
+
+# Editor settings
+.idea/
+.vscode/
+
+# Test/coverage caches
+.pytest_cache/
+.coverage
+htmlcov/
+.cache
+
+# OS X
+.DS_Store
