@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>{{ cv.firstname }} {{ cv.lastname }} - CV</title>
+    <style>
+        body {
+            font-family: Arial, Helvetica, sans-serif;
+            margin: 36px;
+            color: #232323;
+        }
+        .cv-header {
+            border-bottom: 2px solid #1976d2;
+            margin-bottom: 18px;
+            padding-bottom: 10px;
+        }
+        .cv-title {
+            font-size: 2em;
+            color: #1976d2;
+            margin: 0;
+        }
+        .section-title {
+            color: #1976d2;
+            font-size: 1.1em;
+            margin-top: 20px;
+            margin-bottom: 6px;
+            border-bottom: 1px solid #e3e3e3;
+            padding-bottom: 3px;
+            font-weight: bold;
+            letter-spacing: 1px;
+        }
+        .section-content {
+            margin-bottom: 10px;
+            margin-left: 10px;
+        }
+        ul.contact-list {
+            list-style-type: none;
+            margin: 0 0 0 10px;
+            padding: 0;
+        }
+        ul.contact-list li {
+            margin-bottom: 3px;
+        }
+        .label {
+            color: #555;
+            font-weight: bold;
+        }
+    </style>
+</head>
+<body>
+    <div class="cv-header">
+        <div class="cv-title">{{ cv.firstname }} {{ cv.lastname }}</div>
+    </div>
+
+    <div>
+        <div class="section-title">Skills</div>
+        <div class="section-content">{{ cv.skills }}</div>
+    </div>
+    <div>
+        <div class="section-title">Projects</div>
+        <div class="section-content">{{ cv.projects }}</div>
+    </div>
+    <div>
+        <div class="section-title">Bio</div>
+        <div class="section-content">{{ cv.bio }}</div>
+    </div>
+    <div>
+        <div class="section-title">Contacts</div>
+        <div class="section-content">
+            <ul class="contact-list">
+            {% for key, value in cv.contacts.items %}
+                <li><span class="label">{{ key|title }}:</span> {{ value }}</li>
+            {% endfor %}
+            </ul>
+        </div>
+    </div>
+</body>
+</html>

@@ -17,10 +17,11 @@ Including another URLconf
 from django.contrib import admin
 from django.urls import path
 
-from main.views import cv_list, cv_detail
+from main.views import cv_list, cv_detail, cv_pdf
 
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('', cv_list, name='cv_list'),
     path('cv/<int:pk>/', cv_detail, name='cv_detail'),
+    path('cv/<int:pk>/pdf/', cv_pdf, name='cv_pdf'),
 ]

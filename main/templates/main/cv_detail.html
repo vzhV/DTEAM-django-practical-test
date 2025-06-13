@@ -79,6 +79,9 @@
                                 {% endfor %}
                             </ul>
                         </div>
+                    <a href="{% url 'cv_pdf' pk=cv.pk %}" class="btn blue" style="margin-bottom: 16px;">
+                        <i class="material-icons left">picture_as_pdf</i> Download PDF
+                    </a>
                     </div>
                 </div>
             </div>
