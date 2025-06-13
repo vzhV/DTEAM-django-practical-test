@@ -1,0 +1,14 @@
+[
+  {
+    "model": "main.cv",
+    "pk": 1,
+    "fields": {
+      "firstname": "Volodymyr",
+      "lastname": "Zherdetskyi",
+      "skills": "Python, Django, FastAPI, ...",
+      "projects": "DTEAM - Django Developer Practical Test",
+      "bio": "Passionate Fullstack developer.",
+      "contacts": "{\"email\": \"vzhe@example.com\", \"phone\": \"+1234567890\"}"
+    }
+  }
+]

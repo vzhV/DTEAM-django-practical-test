@@ -19,6 +19,20 @@
 poetry install
 ```
 
+## Code Style
+
+This project follows [PEP 8](https://www.python.org/dev/peps/pep-0008/).
+
+- Lint with flake8:
+```sh
+poetry run flake8
+```
+
+## Loading Initial Fixture
+
+```sh
+python manage.py loaddata main/data/initial_cv.json
+```
 
 ## Task Requirements:
 
