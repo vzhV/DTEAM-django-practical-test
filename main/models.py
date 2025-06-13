@@ -1,5 +1,6 @@
 from django.db import models
 
+
 class CV(models.Model):
     firstname = models.CharField(max_length=50)
     lastname = models.CharField(max_length=50)
@@ -7,7 +8,8 @@ class CV(models.Model):
     projects = models.TextField(help_text="Projects separated by comma")
     bio = models.TextField(blank=True)
     contacts = models.JSONField(
-        help_text="Contact information as a dict. Example: {'phone': '+38099...', 'email': 'help@dteam.dev'}",
+        help_text="Contact information as a dict. "
+                  "Example: {'phone': '+38099...', 'email': 'help@dteam.dev'}",
         default=dict,
     )
 
