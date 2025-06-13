@@ -2,9 +2,11 @@ from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
 from django.http import HttpResponse
 from django.shortcuts import render, get_object_or_404
 from django.template.loader import get_template
+from rest_framework import viewsets
 from xhtml2pdf import pisa
 
 from .models import CV
+from .serializers import CVSerializer
 
 
 def cv_list(request):
@@ -52,3 +54,12 @@ def cv_pdf(request, pk):
     if pisa_status.err:
         return HttpResponse("We had some errors with PDF generation <br>" + html)
     return response
+
+
+class CVViewSet(viewsets.ModelViewSet):
+    """
+    API endpoint for managing CVs.
+    Provides standard CRUD actions.
+    """
+    queryset = CV.objects.all().order_by('id')
+    serializer_class = CVSerializer
