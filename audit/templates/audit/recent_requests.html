@@ -31,5 +31,12 @@
             </tbody>
         </table>
     </div>
+    <footer class="center-align" style="margin-top: 32px; color: #888; font-size: 0.95em;">
+        <div>
+            <strong>Debug:</strong> {{ settings.DEBUG }} &nbsp;|&nbsp;
+            <strong>Allowed Hosts:</strong> {{ settings.ALLOWED_HOSTS }} &nbsp;|&nbsp;
+            <strong>Version:</strong> {{ settings.APP_VERSION|default:"unknown" }}
+        </div>
+    </footer>
 </body>
 </html>
