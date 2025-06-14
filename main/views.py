@@ -1,3 +1,5 @@
+import json
+
 from django.contrib import messages
 from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
 from django.http import HttpResponse
@@ -8,6 +10,8 @@ from rest_framework import viewsets
 from xhtml2pdf import pisa
 
 from .models import CV
+from .openai_utils import gpt_translate
+from .prompts import TRANSLATE_CV_PROMPT
 from .serializers import CVSerializer
 from .tasks import send_cv_pdf_email
 
@@ -74,6 +78,37 @@ def send_cv_email(request, pk):
     messages.success(request, f"CV has been sent to {email}")
     return redirect("cv_detail", pk=pk)
 
+
+@require_POST
+def cv_translate(request, pk):
+    cv = get_object_or_404(CV, pk=pk)
+    language = request.POST.get("language")
+    if not language:
+        messages.error(request, "Please select a language.")
+        return redirect("cv_detail", pk=pk)
+
+    cv_json = json.dumps({
+        "firstname": cv.firstname,
+        "lastname": cv.lastname,
+        "skills": cv.skills,
+        "projects": cv.projects,
+        "bio": cv.bio,
+        "contacts": cv.contacts,
+    })
+    prompt = TRANSLATE_CV_PROMPT.format(language=language, cv_json=cv_json)
+    response_text = gpt_translate(prompt)
+
+    try:
+        translated = json.loads(response_text)
+    except json.JSONDecodeError:
+        messages.error(request, "Translation failed: invalid response format.")
+        return redirect("cv_detail", pk=pk)
+    context = {
+        "cv": cv,
+        "translated": translated,
+        "target_language": language,
+    }
+    return render(request, "main/cv_detail.html", context)
 
 class CVViewSet(viewsets.ModelViewSet):
     """
