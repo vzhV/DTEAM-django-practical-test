@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Project Settings</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
+</head>
+<body class="grey lighten-4">
+<div class="container">
+    <h4 class="center-align" style="margin-top:2rem;">Project Settings</h4>
+    <table class="highlight responsive-table">
+        <tbody>
+            <tr>
+                <th>DEBUG</th>
+                <td>
+                    {% if settings.DEBUG %}
+                        <span class="new badge green" data-badge-caption="ON"></span>
+                    {% else %}
+                        <span class="new badge red" data-badge-caption="OFF"></span>
+                    {% endif %}
+                </td>
+            </tr>
+            <tr>
+                <th>ALLOWED_HOSTS</th>
+                <td>
+                    {% if settings.ALLOWED_HOSTS %}
+                        {{ settings.ALLOWED_HOSTS|join:", " }}
+                    {% else %}
+                        <span class="grey-text">[empty]</span>
+                    {% endif %}
+                </td>
+            </tr>
+            <tr>
+                <th>APP_VERSION</th>
+                <td>{{ settings.APP_VERSION }}</td>
+            </tr>
+            <tr>
+                <th>DATABASE ENGINE</th>
+                <td>{{ settings.DATABASES.default.ENGINE }}</td>
+            </tr>
+            <tr>
+                <th>TIME ZONE</th>
+                <td>{{ settings.TIME_ZONE }}</td>
+            </tr>
+            <tr>
+                <th>LANGUAGE_CODE</th>
+                <td>{{ settings.LANGUAGE_CODE }}</td>
+            </tr>
+            <tr>
+                <th>LANGUAGES</th>
+                <td>
+                    {% if settings.LANGUAGES %}
+                        <ul style="margin:0; padding-left:1.2em;">
+                            {% for lang in settings.LANGUAGES %}
+                                <li>{{ lang.0 }} — {{ lang.1 }}</li>
+                            {% endfor %}
+                        </ul>
+                    {% else %}
+                        <span class="grey-text">[default/en-us]</span>
+                    {% endif %}
+                </td>
+            </tr>
+            <tr>
+                <th>USE_I18N</th>
+                <td>{{ settings.USE_I18N }}</td>
+            </tr>
+            <tr>
+                <th>USE_TZ</th>
+                <td>{{ settings.USE_TZ }}</td>
+            </tr>
+            <tr>
+                <th>LOCALE_PATHS</th>
+                <td>
+                    {% if settings.LOCALE_PATHS %}
+                        {{ settings.LOCALE_PATHS|join:", " }}
+                    {% else %}
+                        <span class="grey-text">[not set]</span>
+                    {% endif %}
+                </td>
+            </tr>
+
+            <tr>
+                <th>INSTALLED_APPS</th>
+                <td>
+                    <ul style="margin:0;padding-left:1.2em;">
+                        {% for app in settings.INSTALLED_APPS %}
+                        <li>{{ app }}</li>
+                        {% endfor %}
+                    </ul>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <div class="center-align" style="margin-top:2rem;">
+        <span class="grey-text">Generated from Django settings context via <code>settings_context</code></span>
+    </div>
+</div>
+</body>
+</html>
