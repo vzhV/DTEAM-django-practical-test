@@ -56,6 +56,10 @@ def cv_pdf(request, pk):
     return response
 
 
+def settings_view(request):
+    return render(request, "settings.html")
+
+
 class CVViewSet(viewsets.ModelViewSet):
     """
     API endpoint for managing CVs.
