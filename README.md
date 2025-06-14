@@ -48,6 +48,24 @@ To run tests with verbose output:
 python manage.py test -v 2
 ```
 
+## Docker setup
+
+To run the project using Docker:
+
+1. First, copy the environment variables file:
+   ```sh
+   cp .env-example .env
+   ```
+
+2. Modify the environment variables in the `.env` file as needed for your setup.
+
+3. Build and start the Docker containers:
+   ```sh
+   docker compose up --build
+   ```
+
+   This will create both the PostgreSQL database and web server containers.
+
 ## Task Requirements:
 
 Follow PEP 8 and other style guidelines, use clear and concise commit messages and docstrings where needed, structure your project for readability and maintainability, optimize database access using Django’s built-in methods, and provide enough details in your README.
