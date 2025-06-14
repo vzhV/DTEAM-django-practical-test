@@ -27,3 +27,10 @@ htmlcov/
 
 # OS X
 .DS_Store
+
+# Static files
+static/
+staticfiles/
+
+# Environment variables
+.env
