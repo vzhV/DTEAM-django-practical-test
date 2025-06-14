@@ -3,6 +3,7 @@ from rest_framework import status
 from .models import CV
 from .serializers import CVSerializer
 
+
 class CVAPITestCase(APITestCase):
     def setUp(self):
         self.users = []
@@ -28,7 +29,9 @@ class CVAPITestCase(APITestCase):
         lastnames = [u['lastname'] for u in response.data]
         for i in range(1, 7):
             self.assertIn(f"User-{i}", lastnames)
-        self.assertTrue(any(u['contacts']['email'] == f"user3@example.com" for u in response.data))
+        self.assertTrue(
+            any(u['contacts']['email'] == f"user3@example.com" for u in response.data)
+        )
 
     def test_cv_retrieve(self):
         url = f"/api/cv/{self.cv.id}/"
