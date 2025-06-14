@@ -2,7 +2,9 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>{{ cv.firstname }} {{ cv.lastname }} - CV Detail</title>
+    <title>
+        {{ translated.firstname|default:cv.firstname }} {{ translated.lastname|default:cv.lastname }} - CV Detail
+    </title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
     <style>
@@ -10,14 +12,11 @@
         .main-container { margin-top: 2rem; margin-bottom: 2rem; }
         .cv-detail-card { border-radius: 12px !important; }
         .card-title { color: #1976d2 !important; font-weight: 500; }
-        .section-header {
-            display: flex; align-items: center; gap: 8px; margin-bottom: 8px;
-        }
+        .section-header { display: flex; align-items: center; gap: 8px; margin-bottom: 8px; }
         .contact-list { margin: 0; padding-left: 0; }
-        .contact-list li {
-            list-style: none; padding: 4px 0; display: flex; align-items: center; gap: 8px;
-        }
+        .contact-list li { list-style: none; padding: 4px 0; display: flex; align-items: center; gap: 8px; }
         .back-link { margin-top: 1.5rem; }
+        .chip.language-chip { margin-bottom: 1.2rem; }
     </style>
 </head>
 <body>
@@ -26,87 +25,136 @@
             <i class="material-icons left">arrow_back</i>
             Back to CV List
         </a>
+        {% if target_language %}
+            <div class="chip teal lighten-3 black-text language-chip">
+                <i class="material-icons left">translate</i>
+                Translated to: {{ target_language }}
+            </div>
+        {% endif %}
+        <form method="post" action="{% url 'cv_translate' pk=cv.pk %}">
+            {% csrf_token %}
+            <div class="input-field">
+                <select name="language" required>
+                    <option value="" disabled selected>Choose language</option>
+                    <option value="Cornish">Cornish</option>
+                    <option value="Manx">Manx</option>
+                    <option value="Breton">Breton</option>
+                    <option value="Inuktitut">Inuktitut</option>
+                    <option value="Kalaallisut">Kalaallisut</option>
+                    <option value="Romani">Romani</option>
+                    <option value="Occitan">Occitan</option>
+                    <option value="Ladino">Ladino</option>
+                    <option value="Northern Sami">Northern Sami</option>
+                    <option value="Upper Sorbian">Upper Sorbian</option>
+                    <option value="Kashubian">Kashubian</option>
+                    <option value="Zazaki">Zazaki</option>
+                    <option value="Chuvash">Chuvash</option>
+                    <option value="Livonian">Livonian</option>
+                    <option value="Tsakonian">Tsakonian</option>
+                    <option value="Saramaccan">Saramaccan</option>
+                    <option value="Bislama">Bislama</option>
+                </select>
+                <label>Select Target Language</label>
+            </div>
+            <button type="submit" class="btn blue">
+                <i class="material-icons left">translate</i>Translate
+            </button>
+        </form>
         <div class="row">
             <div class="col s12 m8 offset-m2">
                 <div class="card cv-detail-card">
                     <div class="card-content">
                         <span class="card-title">
                             <i class="material-icons">person</i>
-                            {{ cv.firstname }} {{ cv.lastname }}
+                            {{ translated.firstname|default:cv.firstname }} {{ translated.lastname|default:cv.lastname }}
                         </span>
-
                         <div class="section">
                             <div class="section-header">
                                 <i class="material-icons tiny">build</i>
                                 <h6 class="blue-text" style="margin:0;">Skills</h6>
                             </div>
-                            <p class="grey-text text-darken-2">{{ cv.skills }}</p>
+                            <p class="grey-text text-darken-2">
+                                {{ translated.skills|default:cv.skills }}
+                            </p>
                         </div>
-
                         <div class="divider"></div>
-
                         <div class="section">
                             <div class="section-header">
                                 <i class="material-icons tiny">work</i>
                                 <h6 class="blue-text" style="margin:0;">Projects</h6>
                             </div>
-                            <p class="grey-text text-darken-2">{{ cv.projects }}</p>
+                            <p class="grey-text text-darken-2">
+                                {{ translated.projects|default:cv.projects }}
+                            </p>
                         </div>
-
                         <div class="divider"></div>
-
                         <div class="section">
                             <div class="section-header">
                                 <i class="material-icons tiny">account_circle</i>
                                 <h6 class="blue-text" style="margin:0;">Bio</h6>
                             </div>
-                            <p class="grey-text text-darken-2">{{ cv.bio }}</p>
+                            <p class="grey-text text-darken-2">
+                                {{ translated.bio|default:cv.bio }}
+                            </p>
                         </div>
-
                         <div class="divider"></div>
-
                         <div class="section">
                             <div class="section-header">
                                 <i class="material-icons tiny">contact_mail</i>
                                 <h6 class="blue-text" style="margin:0;">Contact</h6>
                             </div>
                             <ul class="contact-list">
-                                {% for key, value in cv.contacts.items %}
-                                    <li>
-                                        <i class="material-icons tiny grey-text">fiber_manual_record</i>
-                                        <strong>{{ key }}:</strong> {{ value }}
-                                    </li>
-                                {% endfor %}
+                                {% if translated and translated.contacts %}
+                                    {% for key, value in translated.contacts.items %}
+                                        <li>
+                                            <i class="material-icons tiny grey-text">fiber_manual_record</i>
+                                            <strong>{{ key }}:</strong> {{ value }}
+                                        </li>
+                                    {% endfor %}
+                                {% else %}
+                                    {% for key, value in cv.contacts.items %}
+                                        <li>
+                                            <i class="material-icons tiny grey-text">fiber_manual_record</i>
+                                            <strong>{{ key }}:</strong> {{ value }}
+                                        </li>
+                                    {% endfor %}
+                                {% endif %}
                             </ul>
                         </div>
-                    <a href="{% url 'cv_pdf' pk=cv.pk %}" class="btn blue" style="margin-bottom: 16px;">
-                        <i class="material-icons left">picture_as_pdf</i> Download PDF
-                    </a>
-                    <form method="post" action="{% url 'send_cv_email' pk=cv.pk %}" class="row" style="margin-top:2rem;">
-                        {% csrf_token %}
-                        <div class="input-field col s9">
-                            <input type="email" name="email" id="email" required>
-                            <label for="email">Email to send PDF</label>
-                        </div>
-                        <div class="col s3">
-                            <button type="submit" class="btn blue waves-effect waves-light">
-                                <i class="material-icons left">send</i> Send PDF to Email
-                            </button>
-                        </div>
-                    </form>
+                        <a href="{% url 'cv_pdf' pk=cv.pk %}" class="btn blue" style="margin-bottom: 16px;">
+                            <i class="material-icons left">picture_as_pdf</i> Download PDF
+                        </a>
+                        <form method="post" action="{% url 'send_cv_email' pk=cv.pk %}" class="row" style="margin-top:2rem;">
+                            {% csrf_token %}
+                            <div class="input-field col s9">
+                                <input type="email" name="email" id="email" required>
+                                <label for="email">Email to send PDF</label>
+                            </div>
+                            <div class="col s3">
+                                <button type="submit" class="btn blue waves-effect waves-light">
+                                    <i class="material-icons left">send</i> Send PDF to Email
+                                </button>
+                            </div>
+                        </form>
                     </div>
                 </div>
             </div>
         </div>
     </div>
-
     <footer class="center-align" style="margin-top: 32px; color: #888; font-size: 0.95em;">
         <div>
             <strong>Debug:</strong> {{ settings.DEBUG }} &nbsp;|&nbsp;
             <strong>Language:</strong> {{ settings.LANGUAGE_CODE }}
+            {% if target_language %}&nbsp;|&nbsp;<strong>Translated to:</strong> {{ target_language }}{% endif %}
         </div>
     </footer>
 
     <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            var selects = document.querySelectorAll('select');
+            M.FormSelect.init(selects);
+        });
+    </script>
 </body>
 </html>
