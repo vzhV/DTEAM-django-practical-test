@@ -30,7 +30,7 @@ class CVAPITestCase(APITestCase):
         for i in range(1, 7):
             self.assertIn(f"User-{i}", lastnames)
         self.assertTrue(
-            any(u['contacts']['email'] == f"user3@example.com" for u in response.data)
+            any(u['contacts']['email'] == "user3@example.com" for u in response.data)
         )
 
     def test_cv_retrieve(self):
