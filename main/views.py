@@ -1,12 +1,15 @@
+from django.contrib import messages
 from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
 from django.http import HttpResponse
-from django.shortcuts import render, get_object_or_404
+from django.shortcuts import render, get_object_or_404, redirect
 from django.template.loader import get_template
+from django.views.decorators.http import require_POST
 from rest_framework import viewsets
 from xhtml2pdf import pisa
 
 from .models import CV
 from .serializers import CVSerializer
+from .tasks import send_cv_pdf_email
 
 
 def cv_list(request):
@@ -58,6 +61,18 @@ def cv_pdf(request, pk):
 
 def settings_view(request):
     return render(request, "settings.html")
+
+
+@require_POST
+def send_cv_email(request, pk):
+    email = request.POST.get("email")
+    cv = get_object_or_404(CV, pk=pk)
+    if not email:
+        messages.error(request, "Mail address is required.")
+        return redirect("cv_detail", pk=pk)
+    send_cv_pdf_email.delay(pk, email)
+    messages.success(request, f"CV has been sent to {email}")
+    return redirect("cv_detail", pk=pk)
 
 
 class CVViewSet(viewsets.ModelViewSet):
